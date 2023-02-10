@@ -38,7 +38,20 @@ const MORSE_TABLE = {
 };
 
 function decode(expr) {
-    // write your solution here
+    let wordLength = 10;
+    let res = expr.split('**********').map(val => {
+        let offset = 0;
+        let morse = [];
+        while (offset < val.length) {
+            let letter = val.slice(offset, offset + wordLength);
+            morse.push(MORSE_TABLE[letter.replace(/00/g, '').replace(/10/g, '.').replace(/11/g, '-')]);
+            offset += wordLength;
+        }
+        
+        return morse.join('');
+    });
+    
+    return res.join(' ');
 }
 
 module.exports = {
